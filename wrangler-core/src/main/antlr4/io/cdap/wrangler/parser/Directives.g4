@@ -20,6 +20,17 @@ options {
   language = Java;
 }
 
+BYTE_SIZE: DIGIT+ BYTE_UNIT;
+TIME_DURATION: DIGIT+ ('.' DIGIT+)? TIME_UNIT;
+
+fragment BYTE_UNIT: 'B' | 'KB' | 'MB' | 'GB' | 'TB';
+fragment TIME_UNIT: 'ms' | 's' | 'm' | 'h';
+
+value
+    : BYTE_SIZE
+    | TIME_DURATION
+    | ...existing rules...
+    ;
 @lexer::header {
 /*
  * Copyright © 2017-2019 Cask Data, Inc.
